@@ -13,11 +13,11 @@ from app.services.blog_service import (
 
 router = APIRouter(prefix="/blogs", tags=["blog"])
 
-@router.get("/", response_model=list[BlogRead])
+@router.get("", response_model=list[BlogRead])
 def get_blogs(session: Session = Depends(get_db)):
     return list_blogs(session)
 
-@router.post("/", dependencies=[Depends(require_admin)])
+@router.post("", dependencies=[Depends(require_admin)])
 def create_blog(data: BlogCreate, session: Session = Depends(get_db), user: User=Depends(require_admin)):
     return create_new_blog(session, data, user.id)
 

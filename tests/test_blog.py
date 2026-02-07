@@ -15,7 +15,7 @@ async def test_blog_flow(async_client):
     }
 
     create_resp = await async_client.post(
-        "/api/v1/blogs/",
+        "/api/v1/blogs",
         headers = headers,
         json = {
             "title": "Test Blog",
@@ -32,6 +32,6 @@ async def test_blog_flow(async_client):
     )
     assert publish_resp.status_code == 200
 
-    list_resp = await async_client.get("/api/v1/blogs/")
+    list_resp = await async_client.get("/api/v1/blogs")
     assert list_resp.status_code == 200
     assert len(list_resp.json()) >= 1
