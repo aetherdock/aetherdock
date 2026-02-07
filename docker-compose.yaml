@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16.2-alpine
+    environment:
+      POSTGRES_USER: aetherdock
+      POSTGRES_PASSWORD: aetherdock
+      POSTGRES_DB: aetherdock
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    ports:
+      - 8000:8000
+    environment:
+      APP_ENV: dev
+      DATABASE_URL: postgresql://aetherdock:aetherdock@db:5432/aetherdock
+      SECRET_KEY: aetherdock-secret
+    depends_on:
+      - db
+
+volumes:
+  db-data:

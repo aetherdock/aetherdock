@@ -4,6 +4,7 @@ from app.core.logging import setup_logging, logger
 from app.db import init_db
 from contextlib import asynccontextmanager
 from app.api.v1.auth import router as auth_router
+from app.api.v1.blog import router as blog_router
 
 setup_logging()
 
@@ -17,6 +18,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title=settings.APP_NAME, lifespan=lifespan)
 
 app.include_router(auth_router, prefix="/api/v1")
+app.include_router(blog_router, prefix="/api/v1")
 
 @app.get("/healthz")
 def healthz():
