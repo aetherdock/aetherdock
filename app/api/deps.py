@@ -3,6 +3,7 @@ from sqlmodel import Session
 from app.db import get_session
 from app.core.security import decode_access_token
 from app.repository.user_repo import get_user_by_name
+from app.models.user import User
 
 def get_db(session: Session = Depends(get_session)) -> Session:
     return session
